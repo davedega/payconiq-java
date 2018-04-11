@@ -28,4 +28,12 @@ dependencies {
 
     // Java serialization/deserialization library to convert Java Objects into JSON and back
     implementation('com.google.code.gson:gson:2.8.2')
+
+    // Retrofit HTTP client for Android and Java
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit"
+    // RxJava bindings for Android
+    compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+
 }
