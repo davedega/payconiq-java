@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/payconiq_margin_17"
+    android:layout_marginLeft="@dimen/payconiq_margin_17"
+    android:layout_marginRight="@dimen/payconiq_margin_17"
+    android:layout_marginStart="@dimen/payconiq_margin_17">
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/payconiq_margin_8"
+        android:textColor="@color/ironside_gray"
+        tools:text="@string/name" />
+
+    <TextView
+        android:id="@+id/descriptionTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/nameTV"
+        android:layout_alignStart="@+id/nameTV"
+        android:layout_below="@+id/nameTV"
+        android:layout_marginTop="@dimen/payconiq_margin_8"
+        android:textColor="@color/dawn"
+        tools:text="@string/description" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_below="@+id/descriptionTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/payconiq_margin_8"
+        android:background="@color/dawn" />
+
+    <include
+        layout="@layout/stats_layout"/>
+
+
+</RelativeLayout>
