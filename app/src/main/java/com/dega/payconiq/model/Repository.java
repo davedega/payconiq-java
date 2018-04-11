@@ -4,7 +4,7 @@ package com.dega.payconiq.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GithubResponse {
+public class Repository {
 
     @SerializedName("id")
     @Expose
