@@ -2,6 +2,8 @@ package com.dega.payconiq.api;
 
 import com.dega.payconiq.model.Repository;
 
+import java.util.List;
+
 import retrofit2.Retrofit;
 import rx.Observable;
 
@@ -17,7 +19,7 @@ public class ApiService implements ReposApi {
     }
 
     @Override
-    public Observable<Repository> loadRepositories() {
-        return null;
+    public Observable<List<Repository>> loadRepositories() {
+        return api.loadRepositories();
     }
 }

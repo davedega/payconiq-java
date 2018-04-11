@@ -30,4 +30,5 @@ ext {
     rxandroidVersion = '1.2.1'
     dagger = '2.10'
     mockito = '1.10.19'
+    designSupport = '26.1.0'
 }

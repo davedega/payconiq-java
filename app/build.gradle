@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -45,4 +46,9 @@ dependencies {
 
     // Mockito
     testCompile "org.mockito:mockito-core:$rootProject.mockito"
+    compile "com.android.support:recyclerview-v7:$rootProject.designSupport"
+    compile "com.android.support:design:$rootProject.designSupport"
+
+
+
 }

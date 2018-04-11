@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main dimensions -->
+    <dimen name="logo_width">200dp</dimen>
+    <dimen name="logo_height">200dp</dimen>
+
+    <dimen name="item_heigth">50dp</dimen>
+    <dimen name="height_divider">0.2dp</dimen>
+
+    <dimen name="payconiq_margin_4">4dp</dimen>
+    <dimen name="payconiq_margin_8">8dp</dimen>
+    <dimen name="payconiq_margin_12">12dp</dimen>
+
+    <dimen name="item_margin_right">16dp</dimen>
+    <dimen name="item_margin_left">16dp</dimen>
+
+    <dimen name="payconiq_margin_17">17dp</dimen>
+
+
+    <dimen name="payconiq_textsize_16">16sp</dimen>
+
+</resources>
