@@ -2,7 +2,6 @@ package com.dega.payconiq;
 
 import android.support.v4.app.Fragment;
 
-import com.dega.payconiq.PayconiqContract.View;
 import com.dega.payconiq.model.Repository;
 
 import java.util.List;

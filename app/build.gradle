@@ -33,7 +33,13 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit"
+
     // RxJava bindings for Android
     compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
 
+    // Dagger for dependency injection
+    compile "com.google.dagger:dagger:$rootProject.dagger"
+    compile "com.google.dagger:dagger-android:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
 }
