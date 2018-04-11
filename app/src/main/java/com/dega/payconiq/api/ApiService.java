@@ -17,7 +17,7 @@ public class ApiService implements ReposApi {
     }
 
     @Override
-    public Observable<Repository> loadRepositories(String token) {
+    public Observable<Repository> loadRepositories() {
         return null;
     }
 }

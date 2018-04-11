@@ -42,4 +42,7 @@ dependencies {
     compile "com.google.dagger:dagger-android:$rootProject.dagger"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
+
+    // Mockito
+    testCompile "org.mockito:mockito-core:$rootProject.mockito"
 }

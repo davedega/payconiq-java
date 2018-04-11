@@ -12,5 +12,5 @@ import rx.Observable;
 
 public interface ReposApi {
     @GET("/users/JakeWharton/repos?page=1")
-    Observable<Repository> loadRepositories(@Header("X-Api-Authentication") String token);
+    Observable<Repository> loadRepositories();
 }
