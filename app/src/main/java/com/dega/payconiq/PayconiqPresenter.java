@@ -1,7 +1,5 @@
 package com.dega.payconiq;
 
-import android.util.Log;
-
 import com.dega.payconiq.api.ApiService;
 import com.dega.payconiq.infrastructure.schedulers.BaseSchedulerProvider;
 import com.dega.payconiq.model.Repository;
@@ -28,9 +26,12 @@ public class PayconiqPresenter implements PayconiqContract.Presenter {
     @Inject
     ApiService apiService;
 
-    PayconiqContract.View view;
+    private PayconiqContract.View view;
 
-    public PayconiqPresenter(PayconiqContract.View view) {
+    private int currentPage = 0;
+    private boolean endOfResults = false;
+
+    PayconiqPresenter(PayconiqContract.View view) {
         this.view = view;
         Application.getComponent().inject(this);
     }
@@ -45,36 +46,55 @@ public class PayconiqPresenter implements PayconiqContract.Presenter {
 
     @Override
     public void loadRepos() {
-        Observable<List<Repository>> ibashiResponse = apiService.loadRepositories();
-
-        ibashiResponse
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .subscribe(new Observer<List<Repository>>() {
-                    @Override
-                    public void onCompleted() {
-                        view.showLastUpdateTime();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        if (e instanceof UnknownHostException) {
-                            view.showErrorMessage(R.string.no_internet_connection);
-                        } else if (e instanceof HttpException) {
-                            view.showErrorMessage(R.string.not_found);
-                        } else {
-                            view.showErrorMessage(R.string.expection_message);
+        if (!endOfResults) {
+            Observable<List<Repository>> ibashiResponse = apiService.loadRepositories(currentPage++, 15);
+            if (currentPage != 1) {
+                view.showLoading();
+            }
+            ibashiResponse
+                    .subscribeOn(schedulerProvider.computation())
+                    .observeOn(schedulerProvider.ui())
+                    .subscribe(new Observer<List<Repository>>() {
+                        @Override
+                        public void onCompleted() {
+                            view.hideLoading();
+                            if (currentPage == 1) {
+                                view.showLastUpdateTime();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onNext(List<Repository> repositoriesResponse) {
-                        if (repositoriesResponse != null && repositoriesResponse.size() > 0)
-                            view.showRepos(repositoriesResponse);
-                        else {
-                            view.showEmptyList();
+                        @Override
+                        public void onError(Throwable e) {
+                            view.hideLoading();
+                            System.out.println("Presenter onError(): " + e.getMessage());
+                            if (e instanceof UnknownHostException) {
+                                view.showErrorMessage(R.string.no_internet_connection);
+                            } else if (e instanceof HttpException) {
+                                view.showErrorMessage(R.string.not_found);
+                            } else {
+                                view.showErrorMessage(R.string.expection_message);
+                            }
                         }
-                    }
-                });
+
+                        @Override
+                        public void onNext(List<Repository> repositoriesResponse) {
+                            view.hideLoading();
+
+                            if (currentPage == 1) {
+                                if (repositoriesResponse != null && repositoriesResponse.size() > 0)
+                                    view.showRepos(repositoriesResponse);
+                                else {
+                                    view.showEmptyList();
+                                }
+                            } else {
+                                if (repositoriesResponse != null && repositoriesResponse.size() > 0) {
+                                    view.updateList(repositoriesResponse);
+                                } else {
+                                    endOfResults = true;
+                                }
+                            }
+                        }
+                    });
+        }
     }
 }

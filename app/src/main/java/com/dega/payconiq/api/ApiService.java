@@ -19,7 +19,7 @@ public class ApiService implements ReposApi {
     }
 
     @Override
-    public Observable<List<Repository>> loadRepositories() {
-        return api.loadRepositories();
+    public Observable<List<Repository>> loadRepositories(int page, int perPage) {
+        return api.loadRepositories(page,perPage);
     }
 }

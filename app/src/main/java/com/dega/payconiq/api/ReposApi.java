@@ -5,7 +5,7 @@ import com.dega.payconiq.model.Repository;
 import java.util.List;
 
 import retrofit2.http.GET;
-import retrofit2.http.Header;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -13,6 +13,6 @@ import rx.Observable;
  */
 
 public interface ReposApi {
-    @GET("/users/JakeWharton/repos?page=1")
-    Observable<List<Repository>> loadRepositories();
+    @GET("/users/JakeWharton/repos")
+    Observable<List<Repository>> loadRepositories(@Query("page") int page,@Query("per_page") int perPage);
 }
