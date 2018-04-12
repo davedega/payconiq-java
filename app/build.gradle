@@ -49,6 +49,9 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.designSupport"
     compile "com.android.support:design:$rootProject.designSupport"
 
+    compile "io.realm:realm-gradle-plugin:$rootProject.realm"
+    compile "io.realm:android-adapters:$rootProject.realmAdapters"
 
 
 }
+apply plugin: 'realm-android'
