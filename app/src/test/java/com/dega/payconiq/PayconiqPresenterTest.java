@@ -25,8 +25,8 @@ import static org.mockito.Mockito.when;
 /**
  * * The purpose of class is to test the following behavior:
  * <p>
- * 1. Given an empty list of repositories, show no repositories screen
- * 2. Given a valid list of repositories, show repositories in a list
+ * 1. Given an empty list of repos, show no repos screen
+ * 2. Given a valid list of repos, show repos in a list
  * 3. Notify the user if a request failed
  * <p>
  * Created by davedega on 11/04/18.
@@ -68,7 +68,7 @@ public class PayconiqPresenterTest {
     }
 
     /**
-     * 2. Given an empty list of repositories, show no repositories screen
+     * 2. Given an empty list of repos, show no repos screen
      ***/
     @Test
     public void showEmptyScreen() {
@@ -79,7 +79,7 @@ public class PayconiqPresenterTest {
     }
 
     /**
-     * 2. Given a filled list of repositories, show repositories in a list
+     * 2. Given a filled list of repos, show repos in a list
      ***/
     @Test
     public void showRepositories() {

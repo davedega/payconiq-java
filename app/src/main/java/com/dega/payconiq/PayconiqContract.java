@@ -13,6 +13,7 @@ public interface PayconiqContract {
     interface Presenter {
 
         void loadRepos();
+
     }
 
     interface View {
@@ -21,10 +22,18 @@ public interface PayconiqContract {
 
         void showRepos(List<Repository> repositories);
 
+        void updateList(List<Repository> repositories);
+
         void showLastUpdateTime();
 
         void showEmptyList();
 
         void showErrorMessage(int string);
+
+        void showLoading();
+
+        void hideLoading();
+
+
     }
 }
