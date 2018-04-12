@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.dega.payconiq.model.Repository;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +30,10 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
     private LinearLayout loadingContainer;
     private ProgressBar progressBar;
     private TextView updateTextView;
+    private List<Repository> mRepositories;
+    private ReposAdapter adapterTimeTable;
+    private ProgressBar recyclerProgressBar;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -40,6 +43,7 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
         loadingContainer = rootView.findViewById(R.id.loadingContainer);
         progressBar = rootView.findViewById(R.id.progressBar);
         updateTextView = rootView.findViewById(R.id.updateTextView);
+        recyclerProgressBar = rootView.findViewById(R.id.recyclerPB);
         return rootView;
     }
 
@@ -50,19 +54,21 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
 
     @Override
     public void showRepos(List<Repository> repositories) {
+        this.mRepositories = repositories;
         timeTableRV.setVisibility(View.VISIBLE);
         loadingContainer.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         updateTextView.setVisibility(View.GONE);
-
-        LinearLayoutManager mLayoutManager = new
-                LinearLayoutManager(getActivity());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         timeTableRV.setLayoutManager(mLayoutManager);
-
-        ReposAdapter adapterTimeTable = new
-                ReposAdapter(repositories);
-
+        adapterTimeTable = new ReposAdapter();
         timeTableRV.setAdapter(adapterTimeTable);
+    }
+
+    @Override
+    public void updateList(List<Repository> repositories) {
+        this.mRepositories.addAll(repositories);
+        adapterTimeTable.notifyDataSetChanged();
     }
 
     @Override
@@ -84,6 +90,16 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
         mySnackbar.show();
     }
 
+    @Override
+    public void showLoading() {
+        recyclerProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        recyclerProgressBar.setVisibility(View.GONE);
+    }
+
 
     @Override
     public void showLastUpdateTime() {
@@ -101,12 +117,6 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
     // The Adapter lives within the view since is the only class who access it
     class ReposAdapter extends RecyclerView.Adapter<ReposAdapter.ReposViewHolder> {
 
-        final ArrayList<Repository> repositories;
-
-        ReposAdapter(List<Repository> repositories) {
-            this.repositories = new ArrayList<>(repositories);
-        }
-
         @Override
         public ReposViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View root = LayoutInflater.from(getActivity()).
@@ -116,12 +126,17 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
 
         @Override
         public void onBindViewHolder(ReposViewHolder holder, int position) {
-            holder.setRepo(repositories.get(position));
+            holder.setRepo(mRepositories.get(position));
+
+            if (position == mRepositories.size() - 3) {
+                presenter.loadRepos();
+            }
+
         }
 
         @Override
         public int getItemCount() {
-            return repositories.size();
+            return mRepositories.size();
         }
 
         @Override
@@ -149,9 +164,9 @@ public class PayconicFragment extends Fragment implements PayconiqContract.View 
             void setRepo(Repository repository) {
                 this.name.setText(repository.getName());
                 this.description.setText(repository.getDescription());
-                this.watchers.setText(getString(R.string.string_holer,repository.getWatchersCount().toString()));
-                this.stargazers.setText(getString(R.string.string_holer,repository.getWatchersCount().toString()));
-                this.forks.setText(getString(R.string.string_holer,repository.getWatchersCount().toString()));
+                this.watchers.setText(getString(R.string.string_holer, repository.getWatchersCount().toString()));
+                this.stargazers.setText(getString(R.string.string_holer, repository.getWatchersCount().toString()));
+                this.forks.setText(getString(R.string.string_holer, repository.getWatchersCount().toString()));
             }
         }
     }
