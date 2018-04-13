@@ -5,6 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/offlineMode"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/amber"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/offline_mode" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/loadingContainer"
@@ -13,8 +27,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:orientation="vertical"
-       >
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="@dimen/logo_width"
@@ -43,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:scrollbars="vertical"
         android:visibility="gone" />
 
     <ProgressBar

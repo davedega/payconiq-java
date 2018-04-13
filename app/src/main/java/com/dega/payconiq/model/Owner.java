@@ -1,4 +1,3 @@
-
 package com.dega.payconiq.model;
 
 import com.google.gson.annotations.Expose;

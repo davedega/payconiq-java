@@ -41,6 +41,8 @@ public class PayconiqModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build());
+
+
     }
 
     @Provides

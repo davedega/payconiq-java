@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_alignParentEnd="true"
     android:layout_alignParentTop="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"        android:layout_marginTop="@dimen/payconiq_margin_8"
-
+    android:layout_marginTop="@dimen/payconiq_margin_8"
     android:gravity="center"
     android:orientation="horizontal">
 
@@ -17,10 +17,10 @@
         app:srcCompat="@drawable/ic_octicon_eye" />
 
     <TextView
-        android:id="@+id/watchersTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/payconiq_margin_4"
+        android:id="@+id/watchersTV"
         tools:text="@string/watchers" />
 
     <ImageView
@@ -30,10 +30,10 @@
         app:srcCompat="@drawable/ic_octicon_star" />
 
     <TextView
-        android:id="@+id/stargazersTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/payconiq_margin_4"
+        android:id="@+id/stargazersTV"
         tools:text="@string/stargazers" />
 
     <ImageView
@@ -43,9 +43,9 @@
         app:srcCompat="@drawable/ic_octicon_fork" />
 
     <TextView
-        android:id="@+id/forksTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/payconiq_margin_4"
+        android:id="@+id/forksTV"
         tools:text="@string/forks" />
 </LinearLayout>
