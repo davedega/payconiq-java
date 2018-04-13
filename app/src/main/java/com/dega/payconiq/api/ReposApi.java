@@ -14,5 +14,5 @@ import rx.Observable;
 
 public interface ReposApi {
     @GET("/users/JakeWharton/repos")
-    Observable<List<Repository>> loadRepositories(@Query("page") int page,@Query("per_page") int perPage);
+    Observable<List<Repository>> loadRepositories(@Query("page") long page, @Query("per_page") int perPage);
 }

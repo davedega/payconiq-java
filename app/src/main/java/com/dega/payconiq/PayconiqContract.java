@@ -1,8 +1,8 @@
 package com.dega.payconiq;
 
-import com.dega.payconiq.model.Repository;
+import com.dega.payconiq.model.RealmRepo;
 
-import java.util.List;
+import io.realm.RealmResults;
 
 /**
  * Created by davedega on 11/04/18.
@@ -14,15 +14,15 @@ public interface PayconiqContract {
 
         void loadRepos();
 
+        void onDestroy();
+
     }
 
     interface View {
 
         void setPresenter(Presenter presenter);
 
-        void showRepos(List<Repository> repositories);
-
-        void updateList(List<Repository> repositories);
+        void showRepos(RealmResults<RealmRepo> repositories, boolean fromCache);
 
         void showLastUpdateTime();
 
@@ -34,6 +34,12 @@ public interface PayconiqContract {
 
         void hideLoading();
 
+        void onDestroy();
 
+        void showMessage(int string);
+
+        void showOfflineMode();
+
+        void hideOfflineMode();
     }
 }

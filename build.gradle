@@ -5,6 +5,8 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -31,5 +33,5 @@ ext {
     mockito = '1.10.19'
     designSupport = '26.1.0'
     realm = '5.0.0'
-    realmAdapters = '1.4.0'
+    realmAdapters = '2.1.1'
 }

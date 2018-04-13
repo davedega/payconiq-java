@@ -3,7 +3,6 @@ package com.dega.payconiq;
 import com.dega.payconiq.infrastructure.DaggerPayconiqComponent;
 import com.dega.payconiq.infrastructure.PayconiqComponent;
 import com.dega.payconiq.infrastructure.PayconiqModule;
-import com.dega.payconiq.model.Repository;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -28,11 +27,9 @@ public class Application extends android.app.Application {
                 .initialData(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        realm.createObject(Repository.class);
                     }
                 })
                 .build();
-        Realm.deleteRealm(realmConfig); // Delete Realm between app restarts.
         Realm.setDefaultConfiguration(realmConfig);
     }
 
