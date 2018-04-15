@@ -1,6 +1,7 @@
 package com.dega.payconiq.infrastructure;
 
 import com.dega.payconiq.PayconiqPresenter;
+import com.dega.payconiq.model.DataHelper;
 
 import javax.inject.Singleton;
 
@@ -14,4 +15,7 @@ import dagger.Component;
 public interface PayconiqComponent {
 
     void inject(PayconiqPresenter presenter);
+
+    void inject(DataHelper helper);
+
 }

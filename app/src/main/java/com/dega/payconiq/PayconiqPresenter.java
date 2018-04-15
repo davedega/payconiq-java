@@ -28,14 +28,14 @@ public class PayconiqPresenter implements PayconiqContract.Presenter {
     BaseSchedulerProvider schedulerProvider;
     @Inject
     ApiService apiService;
+    @Inject
+    DataHelper dataHelper;
 
     private PayconiqContract.View view;
 
     private long currentPage = 0;
 
     private boolean endOfResults = false;
-    private Realm realm;
-    private DataHelper dataHelper;
     private RealmResults<RealmRepo> realmRepos;
     private boolean cacheAvailable = false;
 
@@ -43,25 +43,20 @@ public class PayconiqPresenter implements PayconiqContract.Presenter {
     PayconiqPresenter(PayconiqContract.View view) {
         this.view = view;
         Application.getComponent().inject(this);
-        realm = Realm.getDefaultInstance();
-        dataHelper = new DataHelper(realm);
-        realmRepos = realm.where(RealmRepo.class).findAllAsync();
-        currentPage = realm.where(RealmRepo.class).count() / 15 == 0 ? 1 : realm.where(RealmRepo.class).count() / 15;
-        cacheAvailable = realm.where(RealmRepo.class).count() > 0;
+        realmRepos = dataHelper.getAllRepos();
+        currentPage = dataHelper.countRepos() / 15 == 0 ? 1 : dataHelper.countRepos() / 15;
+        cacheAvailable = dataHelper.countRepos() > 0;
     }
 
 
     PayconiqPresenter(ApiService apiService, BaseSchedulerProvider mSchedulerProvider,
-                      PayconiqContract.View mView, Realm realm) {
+                      PayconiqContract.View mView, DataHelper datahelper) {
         this.apiService = apiService;
         this.schedulerProvider = mSchedulerProvider;
         this.view = mView;
-        this.realm = realm;
-        dataHelper = new DataHelper(realm);
-        realmRepos = realm.where(RealmRepo.class).findAll();
-        currentPage = realm.where(RealmRepo.class).count() / 15 == 0 ? 1 : realm.where(RealmRepo.class).count() / 15;
-        cacheAvailable = realm.where(RealmRepo.class).count() > 0;
-    }
+        realmRepos = dataHelper.getAllRepos();
+        currentPage = dataHelper.countRepos() / 15 == 0 ? 1 : dataHelper.countRepos() / 15;
+        cacheAvailable = dataHelper.countRepos() > 0;    }
 
     @Override
     public void loadRepos() {
@@ -91,7 +86,7 @@ public class PayconiqPresenter implements PayconiqContract.Presenter {
                                 view.hideLoading();
                                 System.out.println("Presenter onError(): " + e.getMessage());
                                 if (e instanceof UnknownHostException) {
-                                    if (realm.where(RealmRepo.class).count() > 0) {
+                                    if (dataHelper.countRepos() > 0) {
                                         view.showMessage(R.string.no_internet_connection);
                                         view.showOfflineMode();
                                     } else {
@@ -138,7 +133,7 @@ public class PayconiqPresenter implements PayconiqContract.Presenter {
 
     @Override
     public void onDestroy() {
-        realm.close();
+        dataHelper.close();
         view.onDestroy();
     }
 }

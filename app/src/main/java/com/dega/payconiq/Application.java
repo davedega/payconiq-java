@@ -12,9 +12,10 @@ import io.realm.RealmConfiguration;
  */
 
 public class Application extends android.app.Application {
+
     static PayconiqComponent component;
 
-    static PayconiqComponent getComponent() {
+    public static PayconiqComponent getComponent() {
         return component;
     }
 
@@ -32,5 +33,4 @@ public class Application extends android.app.Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
     }
-
 }

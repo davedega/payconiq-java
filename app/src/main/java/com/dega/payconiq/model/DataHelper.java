@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by davedega on 12/04/18.
@@ -48,4 +49,15 @@ public class DataHelper {
         realm.commitTransaction();
     }
 
+    public long countRepos() {
+        return realm.where(RealmRepo.class).count();
+    }
+
+    public RealmResults<RealmRepo> getAllRepos() {
+        return realm.where(RealmRepo.class).findAllAsync();
+    }
+
+    public void close() {
+        realm.close();
+    }
 }

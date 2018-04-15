@@ -6,11 +6,13 @@ import com.dega.payconiq.api.ApiService;
 import com.dega.payconiq.infrastructure.schedulers.BaseSchedulerProvider;
 import com.dega.payconiq.infrastructure.schedulers.SchedulerProvider;
 import com.dega.payconiq.model.Constants;
+import com.dega.payconiq.model.DataHelper;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -49,5 +51,17 @@ public class PayconiqModule {
     @Singleton
     BaseSchedulerProvider provideSchedulerProvider() {
         return new SchedulerProvider();
+    }
+
+    @Provides
+    @Singleton
+    DataHelper provideDataHelper() {
+        return new DataHelper(provideRealm());
+    }
+
+    @Provides
+    @Singleton
+    Realm provideRealm() {
+        return Realm.getDefaultInstance();
     }
 }
