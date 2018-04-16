@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.dega.payconiq"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Java serialization/deserialization library to convert Java Objects into JSON and back
+    implementation('com.google.code.gson:gson:2.8.1')
+
+    // Retrofit HTTP client for Android and Java
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofit"
+
+    // RxJava bindings for Android
+    compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+
+    // Dagger for dependency injection
+    compile "com.google.dagger:dagger:$rootProject.dagger"
+    compile "com.google.dagger:dagger-android:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
+
+    // Mockito
+//    testCompile "org.mockito:mockito-core:$rootProject.mockito"
+    compile "com.android.support:recyclerview-v7:$rootProject.designSupport"
+    compile "com.android.support:design:$rootProject.designSupport"
+
+    compile "io.realm:realm-gradle-plugin:$rootProject.realm"
+    compile "io.realm:android-adapters:$rootProject.realmAdapters"
+
+    testImplementation "org.robolectric:robolectric:3.3.2"
+    testImplementation "org.mockito:mockito-core:2.8.47"
+    testImplementation 'org.robolectric:shadows-support-v4:3.0'
+
+    testImplementation "org.powermock:powermock-module-junit4-rule:1.7.0RC4"
+    testImplementation "org.powermock:powermock-classloading-xstream:1.7.0RC4"
+    testImplementation "org.powermock:powermock-module-junit4:1.7.0RC4"
+    testImplementation "org.powermock:powermock-api-mockito2:1.7.0RC4"
+
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    // Set this dependency to use JUnit 4 rules
+    androidTestImplementation 'com.android.support.test:rules:1.0.1'
+    // Set this dependency to build and run Espresso tests
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+
+}
+apply plugin: 'realm-android'
